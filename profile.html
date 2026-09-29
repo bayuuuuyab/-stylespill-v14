@@ -1,0 +1,42 @@
+<!doctype html><html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#08080a"><title>Profile | StyleSpill</title><link rel="stylesheet" href="styles.css"></head><body class="profile-body"><header class="wrap nav"><a class="logo" href="index.html">Style<span>Spill</span></a><a class="muted" href="products.html">Shop</a></header><main class="wrap profile-wrap">
+<section class="profile-hero premium-profile">
+  <div class="profile-cover profile-cover-image"></div>
+  <div class="profile-main">
+    <div class="profile-avatar-wrap"><img class="profile-avatar-large" data-store-avatar src="assets/profile.svg" alt="StyleSpill profile"></div>
+    <div class="profile-identity">
+      <div class="profile-kicker">STYLESPILL / CREATOR PROFILE</div>
+      <div class="profile-name-row"><h1 data-store-name>StyleSpill</h1><span class="verified-mark">✓</span></div>
+      <p class="profile-handle" data-store-handle>@stylespill</p>
+      <p class="profile-tag" data-store-tagline>Men's Fashion Store</p>
+      <p class="profile-bio" data-store-bio>Curated fashion pria, outfit inspiration, dan creator tools.</p>
+      <blockquote class="profile-quote" data-store-quote>“Wear less. Look better.”</blockquote>
+      <div class="profile-actions"><a class="btn" href="products.html">Shop StyleSpill →</a><a class="btn ghost" id="capcutBtn" href="capcut.html">Open CapCut →</a></div>
+      <div class="social-row" id="socialRow"></div>
+    </div>
+  </div>
+</section>
+<section class="profile-stats premium-stats">
+  <div><b id="profileProducts">0</b><span>Products</span></div>
+  <div><b id="profileCategories">0</b><span>Categories</span></div>
+  <div><b id="profileLooks">∞</b><span>Looks to explore</span></div>
+</section>
+<section class="profile-intro">
+  <div><div class="eyebrow">THE STYLESPILL EDIT</div><h2>Fashion, but make it <span>yours.</span></h2></div>
+  <p>Curated pieces, outfit ideas, and creator tools built for people who want a cleaner way to discover style.</p>
+</section>
+<section class="profile-grid premium-grid">
+  <article class="profile-card about-card"><div class="eyebrow">ABOUT THE STORE</div><h2>Wear less.<br><span>Look better.</span></h2><p data-store-about>Fashion, outfit inspiration, dan cinematic creator tools.</p><div class="profile-pills"><span>Fashion</span><span>Outfit</span><span>Cinematic</span><span>Creator</span></div></article>
+  <article class="profile-card profile-feature"><div class="eyebrow">WHAT YOU'LL FIND</div><div class="feature-row"><span>01</span><div><b>Curated outfits</b><small>Produk dan kombinasi outfit yang mudah dipakai.</small></div></div><div class="feature-row"><span>02</span><div><b>Style Match</b><small>Temukan item yang cocok dengan gaya kamu.</small></div></div><div class="feature-row"><span>03</span><div><b>Creator tools</b><small>Eksplor ide cinematic dan hub Creator StyleSpill.</small></div></div></article>
+</section>
+<section class="profile-collections">
+ <div class="section-head"><div><div class="eyebrow">EXPLORE</div><h2>Start with your style.</h2></div><a class="muted" href="products.html">View all →</a></div>
+ <div class="collection-grid"><a href="products.html?category=Kaos"><span>01</span><b>Everyday Tees</b><small>Clean essentials</small></a><a href="products.html?category=Celana"><span>02</span><b>Clean Trousers</b><small>Relaxed & formal</small></a><a href="style-match.html"><span>03</span><b>Style Match</b><small>Find your direction</small></a></div>
+</section>
+<section class="profile-cta premium-cta"><div><div class="eyebrow">STYLESPILL / CREATOR</div><h2>Build your look.<br><span>Make it yours.</span></h2><p>Discover fashion picks and follow the next StyleSpill creation.</p></div><div class="cta-actions"><a class="btn" href="products.html">Explore store →</a><a class="btn ghost" id="ctaCapcut" href="capcut.html">Open CapCut →</a></div></section>
+</main><footer class="wrap footer">StyleSpill · Fashion & Creator Hub</footer><script src="catalog.js"></script><script>
+document.addEventListener('DOMContentLoaded',()=>{const p=getProfile();
+document.querySelectorAll('[data-store-avatar]').forEach(e=>e.src=p.avatar);document.querySelectorAll('[data-store-name]').forEach(e=>e.textContent=p.name);document.querySelectorAll('[data-store-handle]').forEach(e=>e.textContent=p.handle||'@stylespill');document.querySelectorAll('[data-store-tagline]').forEach(e=>e.textContent=p.tagline);document.querySelectorAll('[data-store-bio]').forEach(e=>e.textContent=p.bio);document.querySelectorAll('[data-store-about]').forEach(e=>e.textContent=p.about||p.bio);document.querySelectorAll('[data-store-quote]').forEach(e=>e.textContent='“'+(p.quote||'Wear less. Look better.')+'”');
+const ps=catalog();document.querySelector('#profileProducts').textContent=ps.length;document.querySelector('#profileCategories').textContent=new Set(ps.map(x=>x.category)).size;
+const cap=document.querySelector('#capcutBtn'), cta=document.querySelector('#ctaCapcut'); if(p.capcutUrl){[cap,cta].forEach(a=>{a.href=p.capcutUrl;a.target='_blank';a.rel='noopener'})}
+const row=document.querySelector('#socialRow');const links=[['TikTok',p.tiktokUrl,'↗'],['Instagram',p.instagramUrl,'↗'],['Shopee',p.shopeeUrl,'↗']].filter(x=>x[1]);row.innerHTML=links.map(x=>`<a href="${escapeHTML(x[1])}" target="_blank" rel="noopener">${escapeHTML(x[0])} ${x[2]}</a>`).join(''); if(!links.length)row.style.display='none';
+});</script></body></html>

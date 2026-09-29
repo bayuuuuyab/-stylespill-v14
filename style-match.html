@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Style Match — StyleSpill</title>
+<link rel="stylesheet" href="styles.css"><link rel="stylesheet" href="v12.css">
+</head>
+<body>
+<header class="topbar"><a class="brand" href="index.html">StyleSpill</a><a class="navlink" href="index.html">← Home</a></header>
+<main class="container">
+<section class="hero small"><p class="eyebrow">STYLE MATCH</p><h1>Find your style.</h1><p>Jawab tiga pilihan dan dapatkan arah outfit yang cocok.</p></section>
+<div class="match-grid">
+<div class="panel"><h2>1. Occasion</h2><div class="chips" id="occasion">
+<button>Casual</button><button>Date</button><button>Campus</button><button>Hangout</button><button>Formal</button>
+</div><h2>2. Style</h2><div class="chips" id="style">
+<button>Clean</button><button>Streetwear</button><button>Korean</button><button>Minimal</button><button>Formal</button>
+</div><button class="primary" id="match">SHOW MY STYLE →</button></div>
+<div class="panel result"><p class="eyebrow">YOUR MATCH</p><h2 id="title">Pilih gaya kamu</h2><p id="copy">Kami akan membuat rekomendasi outfit berdasarkan pilihanmu.</p><div id="items" class="mini-list"></div></div>
+</div>
+</main>
+<script>
+let o="Casual",s="Clean";
+document.querySelectorAll('#occasion button').forEach(b=>b.onclick=()=>{o=b.textContent;document.querySelectorAll('#occasion button').forEach(x=>x.classList.remove('active'));b.classList.add('active')});
+document.querySelectorAll('#style button').forEach(b=>b.onclick=()=>{s=b.textContent;document.querySelectorAll('#style button').forEach(x=>x.classList.remove('active'));b.classList.add('active')});
+document.getElementById('match').onclick=()=>{
+ const title=(s==="Streetwear"?"Street Edit":s==="Korean"?"Korean Daily":s==="Formal"?"Modern Formal":s==="Minimal"?"Minimal Core":"Clean Everyday");
+ document.getElementById('title').textContent=title;
+ document.getElementById('copy').textContent=`Untuk ${o.toLowerCase()} dengan vibe ${s.toLowerCase()}, mulai dari outfit yang sederhana dan mudah dipadukan.`;
+ document.getElementById('items').innerHTML='<div>👕 Graphic / Oversized Tee</div><div>👖 Loose Pants</div><div>👟 Clean Sneakers</div><div>🧢 Basic Cap</div>';
+};
+</script></body></html>

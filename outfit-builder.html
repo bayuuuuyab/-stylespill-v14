@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="id">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Outfit Builder — StyleSpill</title><link rel="stylesheet" href="styles.css"><link rel="stylesheet" href="v12.css"></head>
+<body>
+<header class="topbar"><a class="brand" href="index.html">StyleSpill</a><a class="navlink" href="index.html">← Home</a></header>
+<main class="container">
+<section class="hero small"><p class="eyebrow">OUTFIT BUILDER</p><h1>Build your fit.</h1><p>Pilih satu item dari tiap kategori untuk membuat kombinasi.</p></section>
+<div class="builder">
+<label>TOP<select id="top"><option>RISE Graphic Oversized Tee</option><option>Basic Oversized Tee</option><option>Minimal Shirt</option></select></label>
+<label>BOTTOM<select id="bottom"><option>Formal Easy — Loose Pants</option><option>Relaxed Cargo Pants</option><option>Straight Trousers</option></select></label>
+<label>EXTRA<select id="extra"><option>Basic Cap</option><option>Minimal Bag</option><option>None</option></select></label>
+<div class="outfit-card"><p class="eyebrow">YOUR FIT</p><h2 id="fit">RISE Graphic Oversized Tee + Formal Easy — Loose Pants + Basic Cap</h2><button class="primary" onclick="copyFit()">COPY MY FIT</button></div>
+</div></main>
+<script>
+function update(){document.getElementById('fit').textContent=[top.value,bottom.value,extra.value].join(' + ')}
+[top,bottom,extra].forEach(x=>x.onchange=update);
+function copyFit(){navigator.clipboard?.writeText(document.getElementById('fit').textContent);alert('Outfit copied!')}
+</script></body></html>

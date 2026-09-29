@@ -1,0 +1,3 @@
+Target domain: stylespill.id
+Current free deployment: workers.dev
+Custom domain dapat ditambahkan nanti melalui Cloudflare Worker > Settings > Domains & Routes > Add Custom Domain.
