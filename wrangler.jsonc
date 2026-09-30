@@ -1,6 +1,6 @@
 {
   "$schema": "https://developers.cloudflare.com/workers/wrangler/config-schema.json",
-  "name": "stylespill-v14-2",
+  "name": "stylespill-v16",
   "main": "./worker.js",
   "compatibility_date": "2026-09-28",
   "assets": {

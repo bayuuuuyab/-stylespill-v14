@@ -18,7 +18,24 @@ function normalizeShopeeProduct(d){return {id:d.id||('custom-'+Date.now()),numbe
 function nextProductNumber(){const nums=catalog().map(p=>String(p.number||'').match(/(\d+)$/)?.[1]).filter(Boolean).map(Number);const n=(nums.length?Math.max(...nums):0)+1;return 'SS-'+String(n).padStart(3,'0')}
 function guessCategory(n){const x=n.toLowerCase();if(/sepatu|sneaker|sandal/.test(x))return 'Sepatu';if(/topi|cap/.test(x))return 'Topi';if(/celana|pants|trouser/.test(x))return 'Celana';if(/jaket|jacket|hoodie/.test(x))return 'Jaket';if(/kemeja|shirt/.test(x))return 'Kemeja';if(/tas|bag/.test(x))return 'Tas';return 'Kaos'}
 function guessStyle(n){const x=n.toLowerCase();if(/street|oversize|graphic|distro/.test(x))return 'Streetwear';if(/formal|trouser|office/.test(x))return 'Formal';if(/korean/.test(x))return 'Korean';return 'Casual'}
-function getProfile(){return loadJSON(LS_PROFILE,{name:'StyleSpill',tagline:"Men's Fashion Store",bio:'Curated fashion pria, outfit inspiration, dan creator tools.',avatar:'assets/profile.svg',handle:'@stylespill',capcutUrl:'',location:'Indonesia',about:'Fashion, outfit inspiration, dan cinematic creator tools.',quote:'Wear less. Look better.',instagramUrl:'',tiktokUrl:'',shopeeUrl:''})}
+
+/* StyleSpill CapCut Creator */
+const CAPCUT_CREATOR = {
+  name: 'StyleSpill Edit',
+  handle: '@stylespilledit',
+  followers: '12.4K',
+  templates: '28',
+  category: 'Fashion',
+  profileUrl: '', // Tempel URL profil CapCut kamu di sini setelah kamu kirim
+  bioLines: [
+    '🎬 Cinematic Fashion Templates',
+    '👕 Outfit • Fashion • Affiliate',
+    '⚡ Edit cepat, hasil cinematic'
+  ]
+};
+function getCapcutCreator(){return CAPCUT_CREATOR}
+
+function getProfile(){return loadJSON(LS_PROFILE,{name:'StyleSpill',tagline:"Men's Fashion Store",bio:'Curated fashion pria, outfit inspiration, dan creator tools.',avatar:'assets/profile.svg',handle:'@stylespill',capcutUrl:'capcut.html',location:'Indonesia',about:'Fashion, outfit inspiration, dan cinematic creator tools.',quote:'Wear less. Look better.',instagramUrl:'',tiktokUrl:'',shopeeUrl:''})}
 function saveProfile(p){saveJSON(LS_PROFILE,p)}
 function rupiah(v){if(v===undefined||v===null||v==='')return '-';const s=String(v).replace(/^Rp\s*/,'').replace(/\./g,'').replace(/,/g,'');if(/[–-]/.test(s)){return s.split(/[–-]/).map(x=>'Rp'+new Intl.NumberFormat('id-ID').format(Number(x.trim())||0)).join(' – ')}return 'Rp'+new Intl.NumberFormat('id-ID').format(Number(s)||0)}
 function escapeHTML(s=''){return String(s).replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]))}
