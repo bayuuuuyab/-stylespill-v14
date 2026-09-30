@@ -1,1 +1,107 @@
-(function(){function init(){document.querySelectorAll('.mobile-menu').forEach(btn=>{btn.addEventListener('click',()=>{let o=document.querySelector('.menu-overlay');if(!o){o=document.createElement('div');o.className='menu-overlay';o.innerHTML=`<div class="menu-panel"><div class="menu-top"><div class="menu-title">StyleSpill</div><button class="menu-close" aria-label="Tutup">×</button></div><div class="menu-profile"><img data-store-avatar src="assets/profile.svg"><div><b data-store-name>StyleSpill</b><small data-store-tagline>Men's Fashion Store</small></div></div><nav class="menu-links"><a href="index.html">Home <span>01</span></a><a href="products.html">Shop <span>02</span></a><a href="lookbook.html">Lookbook <span>03</span></a><a href="profile.html">Profil toko <span>04</span></a><a href="capcut.html">CapCut <span>05</span></a></nav></div>;document.body.appendChild(o);renderProfile?.();o.querySelector('.menu-close').onclick=()=>o.classList.remove('open');o.addEventListener('click',e=>{if(e.target===o)o.classList.remove('open')});o.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>o.classList.remove('open')))}o.classList.add('open')})})}document.addEventListener('DOMContentLoaded',init)})();
+document.addEventListener("DOMContentLoaded", function () {
+
+  // =========================
+  // MENU STYLESPILL
+  // =========================
+
+  const menuButtons = document.querySelectorAll(
+    ".mobile-menu, .home-menu-trigger"
+  );
+
+  menuButtons.forEach(function (button) {
+
+    button.addEventListener("click", function (event) {
+      event.preventDefault();
+
+      let menu = document.querySelector(".stylespill-menu");
+
+      // Kalau menu belum ada, buat
+      if (!menu) {
+
+        menu = document.createElement("div");
+        menu.className = "stylespill-menu";
+
+        menu.innerHTML = `
+          <div class="stylespill-menu-box">
+
+            <button class="stylespill-menu-close" type="button">
+              ×
+            </button>
+
+            <div class="stylespill-menu-title">
+              StyleSpill
+            </div>
+
+            <div class="stylespill-menu-profile">
+              <img src="assets/profile.svg" alt="StyleSpill">
+              <div>
+                <strong>StyleSpill</strong>
+                <small>Men's Fashion Store</small>
+              </div>
+            </div>
+
+            <nav class="stylespill-menu-links">
+
+              <a href="index.html">
+                <span>Home</span>
+                <small>01</small>
+              </a>
+
+              <a href="products.html">
+                <span>Shop</span>
+                <small>02</small>
+              </a>
+
+              <a href="lookbook.html">
+                <span>Lookbook</span>
+                <small>03</small>
+              </a>
+
+              <a href="profile.html">
+                <span>Profil toko</span>
+                <small>04</small>
+              </a>
+
+              <a href="capcut.html">
+                <span>CapCut</span>
+                <small>05</small>
+              </a>
+
+            </nav>
+
+          </div>
+        `;
+
+        document.body.appendChild(menu);
+
+        // Tombol tutup
+        const closeButton = menu.querySelector(
+          ".stylespill-menu-close"
+        );
+
+        closeButton.addEventListener("click", function () {
+          menu.classList.remove("open");
+        });
+
+        // Klik area luar menu = tutup
+        menu.addEventListener("click", function (event) {
+          if (event.target === menu) {
+            menu.classList.remove("open");
+          }
+        });
+
+        // Klik link = tutup
+        menu.querySelectorAll("a").forEach(function (link) {
+          link.addEventListener("click", function () {
+            menu.classList.remove("open");
+          });
+        });
+      }
+
+      // Buka menu
+      menu.classList.add("open");
+    });
+
+  });
+
+});
