@@ -1,70 +1,118 @@
 document.addEventListener("DOMContentLoaded", function () {
+  "use strict";
 
-  // =========================
-  // MENU STYLESPILL
-  // =========================
+  /*
+   * STYLESPILL UNIVERSAL MENU
+   */
 
-  const menuButtons = document.querySelectorAll(
-    ".mobile-menu, .home-menu-trigger"
+  // Tambahkan tombol MENU otomatis pada halaman
+  // yang belum mempunyai tombol MENU.
+  const header = document.querySelector(
+    "header.nav, header.topbar"
   );
 
-  menuButtons.forEach(function (button) {
+  if (header && !header.querySelector(".mobile-menu")) {
+    const button = document.createElement("button");
+
+    button.type = "button";
+    button.className = "mobile-menu";
+    button.textContent = "MENU";
+    button.setAttribute("aria-label", "Buka menu");
+
+    header.appendChild(button);
+  }
+
+  /*
+   * Halaman utama index.html mempunyai
+   * menu sendiri, jadi tidak kita ganggu.
+   */
+
+  const buttons = document.querySelectorAll(".mobile-menu");
+
+  buttons.forEach(function (button) {
 
     button.addEventListener("click", function (event) {
+
       event.preventDefault();
+      event.stopPropagation();
 
-      let menu = document.querySelector(".stylespill-menu");
+      let overlay = document.querySelector(".menu-overlay");
 
-      // Kalau menu belum ada, buat
-      if (!menu) {
+      /*
+       * Buat menu hanya sekali
+       */
+      if (!overlay) {
 
-        menu = document.createElement("div");
-        menu.className = "stylespill-menu";
+        overlay = document.createElement("div");
 
-        menu.innerHTML = `
-          <div class="stylespill-menu-box">
+        overlay.className = "menu-overlay";
 
-            <button class="stylespill-menu-close" type="button">
-              ×
-            </button>
+        overlay.innerHTML = `
+          <div
+            class="menu-panel"
+            role="dialog"
+            aria-modal="true"
+            aria-label="Menu StyleSpill"
+          >
 
-            <div class="stylespill-menu-title">
-              StyleSpill
+            <div class="menu-top">
+
+              <div class="menu-title">
+                StyleSpill
+              </div>
+
+              <button
+                class="menu-close"
+                type="button"
+                aria-label="Tutup menu"
+              >
+                ×
+              </button>
+
             </div>
 
-            <div class="stylespill-menu-profile">
-              <img src="assets/profile.svg" alt="StyleSpill">
+            <div class="menu-profile">
+
+              <img
+                src="assets/profile.svg"
+                alt="StyleSpill"
+              >
+
               <div>
-                <strong>StyleSpill</strong>
+                <b>StyleSpill</b>
                 <small>Men's Fashion Store</small>
               </div>
+
             </div>
 
-            <nav class="stylespill-menu-links">
+            <nav
+              class="menu-links"
+              aria-label="Navigasi StyleSpill"
+            >
 
               <a href="index.html">
                 <span>Home</span>
-                <small>01</small>
+                <span>01</span>
               </a>
 
               <a href="products.html">
                 <span>Shop</span>
-                <small>02</small>
+                <span>02</span>
               </a>
 
               <a href="lookbook.html">
                 <span>Lookbook</span>
-                <small>03</small>
+                <span>03</span>
               </a>
 
               <a href="profile.html">
                 <span>Profil toko</span>
-                <small>04</small>
+                <span>04</span>
               </a>
 
               <a href="capcut.html">
                 <span>CapCut</span>
-                <small>05</small>
+                <span>05</span>
               </a>
 
             </nav>
@@ -72,34 +120,64 @@ document.addEventListener("DOMContentLoaded", function () {
           </div>
         `;
 
-        document.body.appendChild(menu);
+        document.body.appendChild(overlay);
 
-        // Tombol tutup
-        const closeButton = menu.querySelector(
-          ".stylespill-menu-close"
-        );
+        /*
+         * Tombol X
+         */
+        const closeButton =
+          overlay.querySelector(".menu-close");
 
         closeButton.addEventListener("click", function () {
-          menu.classList.remove("open");
+
+          overlay.classList.remove("open");
+
+          document.body.classList.remove("menu-open");
+
         });
 
-        // Klik area luar menu = tutup
-        menu.addEventListener("click", function (event) {
-          if (event.target === menu) {
-            menu.classList.remove("open");
+        /*
+         * Klik area gelap di luar panel
+         */
+        overlay.addEventListener("click", function (event) {
+
+          if (event.target === overlay) {
+
+            overlay.classList.remove("open");
+
+            document.body.classList.remove("menu-open");
+
           }
+
         });
 
-        // Klik link = tutup
-        menu.querySelectorAll("a").forEach(function (link) {
+        /*
+         * Klik salah satu menu
+         */
+        const links =
+          overlay.querySelectorAll(".menu-links a");
+
+        links.forEach(function (link) {
+
           link.addEventListener("click", function () {
-            menu.classList.remove("open");
+
+            overlay.classList.remove("open");
+
+            document.body.classList.remove("menu-open");
+
           });
+
         });
+
       }
 
-      // Buka menu
-      menu.classList.add("open");
+      /*
+       * BUKA MENU
+       */
+      overlay.classList.add("open");
+
+      document.body.classList.add("menu-open");
+
     });
 
   });
